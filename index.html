@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="content-Type" content="text/html; utf-8" />
+    <meta http-equiv="Pragma" content="cache" />
+    <meta name="robots" content="INDEX,FOLLOW" />
+    <meta http-equiv="content-Language" content="en" />
+    <meta
+      name="description"
+      content="A simple QR-Code Generator made in HTML, CSS and JavaScript."
+    />
+    <meta
+      name="keywords"
+      content="Fooble, QR-Code, QR-Code Generator"
+    />
+    <meta name="author" content="Fooble" />
+    <meta name="revisit-after" content="2 days" />
+
+    <link rel="stylesheet" href="font/font.css" />
+    <link rel="stylesheet" href="style.css" />
+
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="apple-touch-icon" href="logo.png" />
+
+    <title>QR-Code Generator</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>QR-Code Generator</h1>
+        <p>Paste a url or enter a text to generate a QR code.</p>
+      </header>
+
+      <div class="form">
+        <input type="text" placeholder="Enter URL or text" />
+        <button>Generate QR-Code</button>
+        
+        <a class="only-code" id="download-btn">Open Image</a>
+      </div>
+
+      <div class="qr-code only-code">
+        <img src="" alt="QR-Code" />
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
