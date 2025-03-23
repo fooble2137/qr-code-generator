@@ -14,58 +14,55 @@ body {
 }
 
 .wrapper {
-  height: 260px;
-  background-color: #fff;
-  max-width: 500px;
-  border-radius: 7px;
-  padding: 15px 25px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  transition: height 0.2s ease;
-}
-
-.wrapper.active {
-  height: 679px;
+  background-color: #f5f5f5;
+  width: 450px;
+  border-radius: 10px;
+  padding: 15px 30px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
-  font-size: 21px;
+  font-size: 1.4rem;
   font-weight: 500;
 }
 
 header p {
-  margin-top: 5px;
   color: #666;
-  font-size: 16px;
+  margin-bottom: 15px;
 }
 
 .form {
-  margin: 20px 0 30px;
-}
-
-.form :where(input, button, a) {
-  width: 100%;
-  height: 55px;
-  border: none;
-  outline: none;
-  border-radius: 5px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .form input {
-  font-size: 17px;
-  padding: 0 15px;
+  width: 100%;
+  height: 45px;
+  background: none;
+  color: #000;
+  font-size: 1rem;
   border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0 45px 0 15px;
+  outline: none;
 }
 
 .form :where(button, a) {
-  margin-top: 20px;
-  cursor: pointer;
-  color: #fff;
-  font-size: 17px;
+  width: 100%;
+  font-size: 1rem;
+  padding: 15px 30px;
   background-color: #44b1ff;
-  display: flex;
+  color: #f5f5f5;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
 }
 
 .qr-code {
@@ -78,12 +75,11 @@ header p {
 }
 
 .only-code {
-  opacity: 0;
-  transition: opacity 0.5s 0.05s ease;
+  display: none;
   pointer-events: none;
 }
 
 .active .only-code {
-  opacity: 1;
+  display: flex;
   pointer-events: all;
 }
