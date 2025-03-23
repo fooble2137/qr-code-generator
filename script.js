@@ -1,5 +1,5 @@
 const wrapper = document.querySelector(".wrapper");
-const generateBtn = document.querySelector(".form button");
+const generateBtn = document.getElementById("generate-btn");
 const qrInput = document.querySelector(".form input");
 const qrImg = document.querySelector(".qr-code img");
 const downloadBtn = document.getElementById("download-btn");
