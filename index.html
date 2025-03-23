@@ -11,10 +11,7 @@
       name="description"
       content="A simple QR-Code Generator made in HTML, CSS and JavaScript."
     />
-    <meta
-      name="keywords"
-      content="Fooble, QR-Code, QR-Code Generator"
-    />
+    <meta name="keywords" content="Fooble, QR-Code, QR-Code Generator" />
     <meta name="author" content="Fooble" />
     <meta name="revisit-after" content="2 days" />
 
@@ -23,6 +20,11 @@
 
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="apple-touch-icon" href="logo.png" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
 
     <title>QR-Code Generator</title>
   </head>
@@ -36,8 +38,10 @@
       <div class="form">
         <input type="text" placeholder="Enter url or text" />
         <button>Generate QR-Code</button>
-        
-        <a class="only-code" id="download-btn">Open Image</a>
+
+        <a class="only-code" id="download-btn"
+          ><i class="ri-download-line"></i> Download QR-Code</a
+        >
       </div>
 
       <div class="qr-code only-code">
