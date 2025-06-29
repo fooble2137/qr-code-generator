@@ -15,11 +15,11 @@
     <meta name="author" content="Fooble" />
     <meta name="revisit-after" content="2 days" />
 
-    <link rel="stylesheet" href="font/font.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link href="font/font.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
 
-    <link rel="shortcut icon" href="favicon.ico" />
-    <link rel="apple-touch-icon" href="logo.png" />
+    <link href="favicon.ico" rel="shortcut icon" />
+    <link href="logo.png" rel="apple-touch-icon" />
 
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
@@ -29,23 +29,57 @@
     <title>QR-Code Generator</title>
   </head>
   <body>
-    <div class="wrapper">
+    <div class="container">
       <header>
         <h1>QR-Code Generator</h1>
         <p>Paste a url or a text to generate a QR-code.</p>
       </header>
 
       <div class="form">
-        <input type="text" placeholder="Enter url or text" />
-        <button id="generate-btn">Generate QR-Code</button>
+        <div class="input-box">
+          <input type="text" placeholder="Enter URL or text" />
+          <i class="ri-close-line"></i>
+        </div>
 
-        <button class="only-code" id="download-btn"
-          ><i class="ri-download-line"></i> Download QR-Code</button
-        >
+        <div class="size-options">
+          <label>Size:</label>
+          <select id="size-select">
+            <option value="150x150">Small (150x150)</option>
+            <option value="200x200" selected>Medium (200x200)</option>
+            <option value="300x300">Large (300x300)</option>
+            <option value="500x500">Extra Large (500x500)</option>
+          </select>
+        </div>
+
+        <button id="generate-btn">Generate QR Code</button>
+
+        <div class="qr-actions only-code">
+          <button class="action-btn" id="download-btn">
+            <i class="ri-download-line"></i> Download
+          </button>
+          <button class="action-btn" id="copy-btn">
+            <i class="ri-file-copy-line"></i> Copy
+          </button>
+          <button class="action-btn" id="reset-btn">
+            <i class="ri-refresh-line"></i> Clear
+          </button>
+        </div>
       </div>
 
       <div class="qr-code only-code">
-        <img src="" alt="QR-Code" />
+        <div class="loading-spinner" style="display: none">
+          <i class="ri-loader-4-line"></i>
+          <span>Generating QR Code...</span>
+        </div>
+        <img src alt="Generated QR Code" />
+        <div class="qr-info">
+          <span class="qr-text"></span>
+        </div>
+      </div>
+
+      <div class="recent-history" style="display: none">
+        <h3>Recent QR Codes</h3>
+        <div class="history-list"></div>
       </div>
     </div>
 
