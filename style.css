@@ -265,5 +265,6 @@ header p {
 @media screen and (max-height: 650px) {
   .container {
     min-height: 100dvh;
+    border-radius: 0;
   }
 }
