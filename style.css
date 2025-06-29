@@ -10,7 +10,7 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100dvh;
-  background-color: #44b1ff;
+  background-color: #17984d;
 }
 
 .wrapper {
@@ -54,7 +54,7 @@ header p {
   width: 100%;
   font-size: 1rem;
   padding: 15px 30px;
-  background-color: #44b1ff;
+  background-color: #17984d;
   color: #f5f5f5;
   border: none;
   border-radius: 10px;
