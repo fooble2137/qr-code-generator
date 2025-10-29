@@ -41,11 +41,6 @@
     padding: 0 !important;
   }
 
-  nav {
-    border-bottom: 1px solid #e0e0e0;
-    height: 59px;
-  }
-
   .card {
     box-shadow: none !important;
     border-radius: 0 !important;

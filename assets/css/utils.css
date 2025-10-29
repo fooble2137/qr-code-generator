@@ -17,6 +17,7 @@ main {
   border-radius: 8px;
   background-color: #fff;
   padding: 30px;
+  height: fit-content;
 }
 
 .card h1 {

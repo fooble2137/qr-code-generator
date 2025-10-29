@@ -35,8 +35,8 @@ sizeSlider.addEventListener("input", () => {
   updateSizeLabel();
   generateQRCode();
 });
-fgColorPicker.addEventListener("input", generateQRCode);
-bgColorPicker.addEventListener("input", generateQRCode);
+fgColorPicker.addEventListener("input", handleColorInput);
+bgColorPicker.addEventListener("input", handleColorInput);
 downloadBtn.addEventListener("click", downloadQRCode);
 copyBtn.addEventListener("click", copyQRCode);
 
@@ -44,6 +44,28 @@ document.addEventListener("tabChanged", (e) => {
   currentTab = e.detail.tab;
   generateQRCode();
 });
+
+function handleColorInput(e) {
+  const input = e.target;
+  let value = input.value.trim();
+
+  if (value && !value.startsWith("#")) {
+    value = "#" + value;
+    input.value = value;
+  }
+
+  if (isValidHexColor(value)) {
+    input.style.borderColor = "";
+    generateQRCode();
+  } else {
+    input.style.borderColor = "red";
+  }
+}
+
+function isValidHexColor(color) {
+  if (!color) return false;
+  return /^#([0-9A-Fa-f]{3}){1,2}$/.test(color);
+}
 
 function updateSizeLabel() {
   const size = sizeSlider.value;
@@ -85,12 +107,22 @@ function generateQRCode() {
   }
 
   const size = sizeSlider.value;
-  const fgColor = fgColorPicker.value.substring(1);
-  const bgColor = bgColorPicker.value.substring(1);
+
+  let fgColor = fgColorPicker.value.trim();
+  let bgColor = bgColorPicker.value.trim();
+
+  if (fgColor && !fgColor.startsWith("#")) fgColor = "#" + fgColor;
+  if (bgColor && !bgColor.startsWith("#")) bgColor = "#" + bgColor;
+
+  if (!isValidHexColor(fgColor)) fgColor = "#000000";
+  if (!isValidHexColor(bgColor)) bgColor = "#ffffff";
+
+  const fgColorHex = fgColor.substring(1);
+  const bgColorHex = bgColor.substring(1);
 
   const url = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(
     qrValue
-  )}&color=${fgColor}&bgcolor=${bgColor}`;
+  )}&color=${fgColorHex}&bgcolor=${bgColorHex}`;
 
   qrImg.src = url;
   qrImg.style.opacity = "1";
@@ -100,8 +132,8 @@ function generateQRCode() {
     text: qrValue,
     url: url,
     size: size,
-    fgColor: fgColorPicker.value,
-    bgColor: bgColorPicker.value,
+    fgColor: fgColor,
+    bgColor: bgColor,
   };
 }
 
