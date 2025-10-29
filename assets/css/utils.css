@@ -146,6 +146,59 @@ main {
   cursor: not-allowed;
 }
 
+.btn-outline {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.2s;
+  cursor: pointer;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  background-color: transparent;
+  padding: 5px 10px;
+  color: #5f6977;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.btn-outline:hover {
+  color: #000;
+}
+
+.btn-outline:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Info */
+.info {
+  border: 1px solid #bedbff;
+  border-radius: 6px;
+  background-color: #eff6ff;
+  padding: 10px 15px;
+  font-size: 0.9rem;
+}
+
+.info .title {
+  font-weight: 500;
+}
+
+.info p:not(.title) {
+  margin-top: 5px;
+  color: #333;
+}
+
+.info ul {
+  margin-top: 5px;
+  padding-left: 20px;
+}
+
+.info ul li {
+  margin-bottom: 3px;
+  color: #333;
+  list-style-type: circle;
+}
+
 /* Nav */
 nav {
   display: flex;
@@ -202,7 +255,7 @@ nav .mobile-nav-toggle {
   display: none;
   cursor: pointer;
   padding: 8px;
-    font-weight: 400;
+  font-weight: 400;
   font-size: 1.5rem;
 }
 
