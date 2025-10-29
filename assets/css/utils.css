@@ -97,6 +97,24 @@ main {
   border-color: var(--primary-color);
 }
 
+.input-box input[type="checkbox"] {
+  accent-color: var(--primary-color);
+}
+
+.input-box input[type="range"] {
+  accent-color: var(--primary-color);
+}
+
+.input-box .checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.input-box .checkbox-group label {
+  font-weight: 400;
+}
+
 /* Buttons */
 .btns {
   display: flex;
@@ -163,7 +181,7 @@ nav a.soon {
   text-decoration: line-through;
 }
 
-nav a:not(.soon):hover {
+nav a:not(.soon):not(.selected):hover {
   background-color: #f3f3f5;
 }
 
@@ -173,10 +191,18 @@ nav a.selected {
   color: #fff;
 }
 
+nav .mobile-text {
+  display: none;
+  color: var(--primary-color);
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
 nav .mobile-nav-toggle {
   display: none;
   cursor: pointer;
   padding: 8px;
+    font-weight: 400;
   font-size: 1.5rem;
 }
 
@@ -211,12 +237,16 @@ nav.mobile-nav-active .items {
 }
 
 @media (max-width: 850px) {
+  nav .mobile-text {
+    display: block;
+  }
+
   nav .mobile-nav-toggle {
     display: block;
   }
 
   nav {
-    justify-content: flex-end;
+    justify-content: space-between;
   }
 
   nav .items {
