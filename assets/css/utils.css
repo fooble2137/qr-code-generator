@@ -207,6 +207,7 @@ nav.mobile-nav-active .items {
   background-color: rgba(0, 0, 0, 0.3);
   width: 100%;
   height: calc(100dvh - 60px);
+  user-select: none;
 }
 
 @media (max-width: 850px) {
