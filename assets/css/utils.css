@@ -1,13 +1,14 @@
 /* Body */
 body {
   position: relative;
-  background-color: var(--primary-color);
 }
 
 main {
   display: flex;
   justify-content: center;
+  background-color: var(--primary-color);
   padding: 30px;
+  min-height: calc(100dvh - 60px);
 }
 
 /* Card */
