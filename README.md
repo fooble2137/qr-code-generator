@@ -4,4 +4,4 @@ A simple QR code generator developed using HTML, CSS and JavaScript. This lightw
 
 Made using [goqr.me](https://goqr.me/de/api/).
 
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/license/mit/) ![Version2](https://img.shields.io/badge/Version-2.0-blue.svg)
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/license/mit/) ![Version3](https://img.shields.io/badge/Version-3.0-yellow.svg)
