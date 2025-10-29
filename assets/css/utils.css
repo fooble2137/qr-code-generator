@@ -1,0 +1,110 @@
+/* Card */
+.card {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 30px;
+}
+
+.card h1 {
+  margin-bottom: 30px;
+  font-weight: 500;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  background-color: #ececf0;
+  padding: 5px;
+}
+
+.tabs button {
+  flex: 1;
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 5px 0;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  user-select: none;
+  text-align: center;
+}
+
+.tabs button.active {
+  background-color: #fff;
+}
+
+/* Form */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form.horizontal {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.input-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-box label {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.input-box input,
+.input-box select {
+  transition: border-color 0.2s;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  background-color: #f3f3f5;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+}
+
+.input-box input::placeholder {
+  color: #999;
+}
+
+.input-box input:focus,
+.input-box select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+/* Buttons */
+.btns {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.2s;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--primary-color);
+  padding: 8px 15px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}

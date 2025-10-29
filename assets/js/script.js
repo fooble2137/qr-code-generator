@@ -1,121 +1,127 @@
-const container = document.querySelector(".container");
-const generateBtn = document.getElementById("generate-btn");
-const qrInput = document.querySelector(".input-box input");
-const inputContainer = document.querySelector(".input-box");
-const clearBtn = document.querySelector(".input-box i");
-const sizeSelect = document.getElementById("size-select");
-const qrImg = document.querySelector(".qr-code img");
-const qrText = document.querySelector(".qr-text");
-const loadingSpinner = document.querySelector(".loading-spinner");
+const textInput = document.getElementById("text-input");
+const urlInput = document.getElementById("url-input");
+const ssidInput = document.getElementById("ssid-input");
+const passwordInput = document.getElementById("password-input");
+const encryptionSelect = document.getElementById("encryption-select");
+const sizeSlider = document.getElementById("size");
+const sizeLabel = document.querySelector('label[for="size"]');
+const fgColorPicker = document.getElementById("fg-color");
+const bgColorPicker = document.getElementById("bg-color");
+const qrImg = document.getElementById("qr-code");
 const downloadBtn = document.getElementById("download-btn");
 const copyBtn = document.getElementById("copy-btn");
-const resetBtn = document.getElementById("reset-btn");
-const recentHistory = document.querySelector(".recent-history");
-const historyList = document.querySelector(".history-list");
 
 let currentQRData = null;
-let history = JSON.parse(localStorage.getItem("qrHistory") || "[]");
+let currentTab = "text";
 
-// Initialize
-updateHistoryDisplay();
-updateInputState();
+function initializeDummyData() {
+  textInput.value = "Hello, World!";
+  urlInput.value = "https://example.com";
+  ssidInput.value = "MyHomeWiFi";
+  passwordInput.value = "password123";
+  encryptionSelect.value = "WPA";
+}
 
-// Event Listeners
-generateBtn.addEventListener("click", generateQRCode);
-qrInput.addEventListener("input", updateInputState);
-qrInput.addEventListener("keypress", (e) => {
-  if (e.key === "Enter") generateQRCode();
+initializeDummyData();
+updateSizeLabel();
+generateQRCode();
+
+textInput.addEventListener("input", generateQRCode);
+urlInput.addEventListener("input", generateQRCode);
+ssidInput.addEventListener("input", generateQRCode);
+passwordInput.addEventListener("input", generateQRCode);
+encryptionSelect.addEventListener("change", generateQRCode);
+sizeSlider.addEventListener("input", () => {
+  updateSizeLabel();
+  generateQRCode();
 });
-qrInput.addEventListener("paste", () => {
-  setTimeout(() => {
-    if (qrInput.value.trim()) {
-      generateQRCode();
-    }
-  }, 100);
-});
-
-clearBtn.addEventListener("click", clearInput);
-resetBtn.addEventListener("click", resetQRCode);
+fgColorPicker.addEventListener("input", generateQRCode);
+bgColorPicker.addEventListener("input", generateQRCode);
 downloadBtn.addEventListener("click", downloadQRCode);
 copyBtn.addEventListener("click", copyQRCode);
 
-function updateInputState() {
-  const hasContent = qrInput.value.trim().length > 0;
-  inputContainer.classList.toggle("has-content", hasContent);
-  generateBtn.disabled = !hasContent;
+document.addEventListener("tabChanged", (e) => {
+  currentTab = e.detail.tab;
+  generateQRCode();
+});
+
+function updateSizeLabel() {
+  const size = sizeSlider.value;
+  sizeLabel.textContent = `Size: ${size}px`;
 }
 
-function clearInput() {
-  qrInput.value = "";
-  qrInput.focus();
-  updateInputState();
-}
+function getQRData() {
+  let data = "";
 
-function resetQRCode() {
-  container.classList.remove("active");
-  clearInput();
-}
+  switch (currentTab) {
+    case "text":
+      data = textInput.value.trim();
+      break;
+    case "url":
+      data = urlInput.value.trim();
+      break;
+    case "wifi":
+      const ssid = ssidInput.value.trim();
+      const password = passwordInput.value.trim();
+      const encryption = encryptionSelect.value;
 
-async function generateQRCode() {
-  const qrValue = qrInput.value.trim();
-  if (!qrValue) return;
-
-  const size = sizeSelect.value;
-
-  // Show loading state
-  generateBtn.innerHTML = '<i class="ri-loader-4-line"></i> Generating...';
-  generateBtn.disabled = true;
-  loadingSpinner.style.display = "flex";
-  qrImg.style.display = "none";
-
-  try {
-    const url = `https://api.qrserver.com/v1/create-qr-code/?size=${size}&data=${encodeURIComponent(
-      qrValue
-    )}`;
-
-    // Test if the image loads successfully
-    await new Promise((resolve, reject) => {
-      const testImg = new Image();
-      testImg.onload = resolve;
-      testImg.onerror = reject;
-      testImg.src = url;
-    });
-
-    qrImg.src = url;
-    qrText.textContent = qrValue;
-    currentQRData = { text: qrValue, url: url, size: size };
-
-    // Add to history
-    addToHistory(currentQRData);
-
-    qrImg.onload = () => {
-      loadingSpinner.style.display = "none";
-      qrImg.style.display = "block";
-      container.classList.add("active");
-      generateBtn.innerHTML = "Generate QR Code";
-      generateBtn.disabled = false;
-    };
-  } catch (error) {
-    loadingSpinner.style.display = "none";
-    generateBtn.innerHTML = "Generate QR Code";
-    generateBtn.disabled = false;
-    alert("Failed to generate QR code. Please check your input and try again.");
+      if (ssid) {
+        // WiFi QR code format: WIFI:T:WPA;S:mynetwork;P:mypassword;;
+        data = `WIFI:T:${encryption};S:${ssid};P:${password};;`;
+      }
+      break;
   }
+
+  return data;
+}
+
+function generateQRCode() {
+  const qrValue = getQRData();
+
+  if (!qrValue) {
+    qrImg.style.opacity = "0.3";
+    qrImg.alt = "No data";
+    return;
+  }
+
+  const size = sizeSlider.value;
+  const fgColor = fgColorPicker.value.substring(1);
+  const bgColor = bgColorPicker.value.substring(1);
+
+  const url = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(
+    qrValue
+  )}&color=${fgColor}&bgcolor=${bgColor}`;
+
+  qrImg.src = url;
+  qrImg.style.opacity = "1";
+  qrImg.alt = "Generated QR Code";
+
+  currentQRData = {
+    text: qrValue,
+    url: url,
+    size: size,
+    fgColor: fgColorPicker.value,
+    bgColor: bgColorPicker.value,
+  };
 }
 
 async function downloadQRCode() {
-  if (!currentQRData) return;
+  if (!currentQRData || !getQRData()) return;
 
   try {
+    const response = await fetch(currentQRData.url);
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+
     const a = document.createElement("a");
-    a.href = await toDataURL(currentQRData.url);
+    a.href = url;
     const fileName = `qrcode_${currentQRData.size}_${Date.now()}.png`;
     a.download = fileName;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 
-    // Update button temporarily
     const originalContent = downloadBtn.innerHTML;
     downloadBtn.innerHTML = '<i class="ri-check-line"></i> Downloaded';
     setTimeout(() => {
@@ -127,7 +133,7 @@ async function downloadQRCode() {
 }
 
 async function copyQRCode() {
-  if (!currentQRData) return;
+  if (!currentQRData || !getQRData()) return;
 
   try {
     const response = await fetch(currentQRData.url);
@@ -135,14 +141,12 @@ async function copyQRCode() {
 
     await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
 
-    // Update button temporarily
     const originalContent = copyBtn.innerHTML;
     copyBtn.innerHTML = '<i class="ri-check-line"></i> Copied';
     setTimeout(() => {
       copyBtn.innerHTML = originalContent;
     }, 2000);
   } catch (error) {
-    // Fallback: copy the text instead
     try {
       await navigator.clipboard.writeText(currentQRData.text);
       const originalContent = copyBtn.innerHTML;
@@ -151,66 +155,7 @@ async function copyQRCode() {
         copyBtn.innerHTML = originalContent;
       }, 2000);
     } catch (textError) {
-      alert("Failed to copy QR code.");
+      alert("Failed to copy QR code. It might be due to browser restrictions.");
     }
-  }
-}
-
-function addToHistory(qrData) {
-  // Remove duplicate if exists
-  history = history.filter((item) => item.text !== qrData.text);
-
-  // Add to beginning
-  history.unshift({
-    text: qrData.text,
-    url: qrData.url,
-    size: qrData.size,
-    timestamp: Date.now(),
-  });
-
-  // Keep only last 10 items
-  history = history.slice(0, 10);
-
-  // Save to localStorage
-  localStorage.setItem("qrHistory", JSON.stringify(history));
-
-  updateHistoryDisplay();
-}
-
-function updateHistoryDisplay() {
-  if (history.length === 0) {
-    recentHistory.style.display = "none";
-    return;
-  }
-
-  recentHistory.style.display = "block";
-  historyList.innerHTML = "";
-
-  history.forEach((item, index) => {
-    const historyItem = document.createElement("div");
-    historyItem.className = "history-item";
-    historyItem.innerHTML = `
-      <img src="${item.url}" alt="QR Code">
-      <div class="history-item-text">${item.text}</div>
-    `;
-
-    historyItem.addEventListener("click", () => {
-      qrInput.value = item.text;
-      sizeSelect.value = item.size;
-      updateInputState();
-      generateQRCode();
-    });
-
-    historyList.appendChild(historyItem);
-  });
-}
-
-async function toDataURL(url) {
-  try {
-    const blob = await fetch(url).then((res) => res.blob());
-    return URL.createObjectURL(blob);
-  } catch (error) {
-    console.error("Error converting to data URL:", error);
-    throw error;
   }
 }
