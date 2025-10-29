@@ -128,13 +128,13 @@ main {
 
 /* Nav */
 nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   padding: 15px 30px;
   height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 nav .items {
