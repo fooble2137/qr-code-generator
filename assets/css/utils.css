@@ -1,3 +1,15 @@
+/* Body */
+body {
+  position: relative;
+  background-color: var(--primary-color);
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+
 /* Card */
 .card {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -107,4 +119,98 @@
 
 .btn:hover {
   opacity: 0.9;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Nav */
+nav {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  padding: 15px 30px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+nav .items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+nav a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s;
+  border-radius: 6px;
+  padding: 8px 10px;
+  color: #5f6977;
+  font-size: 1rem;
+}
+
+nav a:hover {
+  background-color: #f3f3f5;
+}
+
+nav a.selected {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+nav .mobile-nav-toggle {
+  display: none;
+  cursor: pointer;
+  padding: 8px;
+  font-size: 1.5rem;
+}
+
+nav.mobile-nav-active .items {
+  display: flex;
+  position: absolute;
+  top: 60px;
+  right: 0;
+  flex-direction: column;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 0 8px;
+  background-color: #fff;
+  padding: 10px 0;
+  width: 200px;
+}
+
+#mobile-nav-overlay {
+  display: none;
+}
+
+#mobile-nav-overlay.active {
+  display: block;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  z-index: 5;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: calc(100dvh - 60px);
+}
+
+@media (max-width: 850px) {
+  nav .mobile-nav-toggle {
+    display: block;
+  }
+
+  nav {
+    justify-content: flex-end;
+  }
+
+  nav .items {
+    display: none;
+  }
 }

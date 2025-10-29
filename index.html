@@ -40,98 +40,118 @@
     <title>QR Code Generator</title>
   </head>
   <body>
-    <div class="card">
-      <h1>QR Code Generator</h1>
+    <div id="mobile-nav-overlay"></div>
 
-      <div class="qr-generator">
-        <div class="settings form">
-          <div class="input-box">
-            <label for="tabs">QR Code Type</label>
-            <div class="tabs" id="tabs">
-              <button data-tab="text">Text</button>
-              <button data-tab="url">URL</button>
-              <button data-tab="wifi">WiFi</button>
-            </div>
-          </div>
+    <nav>
+      <div class="items">
+        <a href="/qr" class="selected"
+          ><i class="ri-qr-code-line"></i> QR Code</a
+        >
+        <a href="/barcode"><i class="ri-barcode-line"></i> Barcode</a>
+        <a href="/gradient"><i class="ri-palette-line"></i> CSS Gradient</a>
+        <a href="/password"><i class="ri-key-2-line"></i> Password</a>
+        <a href="/timezone"><i class="ri-time-line"></i> Timezone</a>
+        <a href="/roman"><i class="ri-hashtag"></i> Roman</a>
+      </div>
 
-          <div class="input-box" data-tab-content="text">
-            <label for="text-input">Text</label>
-            <input id="text-input" type="text" placeholder="Enter text" />
-          </div>
+      <button class="mobile-nav-toggle"><i class="ri-menu-line"></i></button>
+    </nav>
 
-          <div class="input-box" data-tab-content="url">
-            <label for="url-input">URL</label>
-            <input id="url-input" type="url" placeholder="Enter URL" />
-          </div>
+    <main>
+      <div class="card">
+        <h1>QR Code Generator</h1>
 
-          <div class="form" data-tab-content="wifi">
+        <div class="qr-generator">
+          <div class="settings form">
             <div class="input-box">
-              <label for="ssid-input">Network Name (SSID)</label>
-              <input id="ssid-input" type="text" placeholder="Enter SSID" />
+              <label for="tabs">QR Code Type</label>
+              <div class="tabs" id="tabs">
+                <button data-tab="text">Text</button>
+                <button data-tab="url">URL</button>
+                <button data-tab="wifi">WiFi</button>
+              </div>
+            </div>
+
+            <div class="input-box" data-tab-content="text">
+              <label for="text-input">Text</label>
+              <input id="text-input" type="text" placeholder="Enter text" />
+            </div>
+
+            <div class="input-box" data-tab-content="url">
+              <label for="url-input">URL</label>
+              <input id="url-input" type="url" placeholder="Enter URL" />
+            </div>
+
+            <div class="form" data-tab-content="wifi">
+              <div class="input-box">
+                <label for="ssid-input">Network Name (SSID)</label>
+                <input id="ssid-input" type="text" placeholder="Enter SSID" />
+              </div>
+
+              <div class="input-box">
+                <label for="password-input">Password</label>
+                <input
+                  id="password-input"
+                  type="password"
+                  placeholder="Enter Password"
+                />
+              </div>
+
+              <div class="input-box">
+                <label for="encryption-select">Encryption Type</label>
+                <select id="encryption-select">
+                  <option value="WPA">WPA/WPA2</option>
+                  <option value="WEP">WEP</option>
+                  <option value="nopass">No Password</option>
+                </select>
+              </div>
             </div>
 
             <div class="input-box">
-              <label for="password-input">Password</label>
+              <label for="size">Size: 256px</label>
               <input
-                id="password-input"
-                type="password"
-                placeholder="Enter Password"
+                id="size"
+                type="range"
+                min="128"
+                max="512"
+                value="256"
+                step="128"
               />
             </div>
 
-            <div class="input-box">
-              <label for="encryption-select">Encryption Type</label>
-              <select id="encryption-select">
-                <option value="WPA">WPA/WPA2</option>
-                <option value="WEP">WEP</option>
-                <option value="nopass">No Password</option>
-              </select>
+            <div class="form horizontal">
+              <div class="input-box">
+                <label for="fg-color">Foreground Color</label>
+                <input id="fg-color" type="color" value="#000000" />
+              </div>
+
+              <div class="input-box">
+                <label for="bg-color">Background Color</label>
+                <input id="bg-color" type="color" value="#ffffff" />
+              </div>
             </div>
           </div>
 
-          <div class="input-box">
-            <label for="size">Size: 256px</label>
-            <input
-              id="size"
-              type="range"
-              min="128"
-              max="512"
-              value="256"
-              step="128"
-            />
-          </div>
-
-          <div class="form horizontal">
-            <div class="input-box">
-              <label for="fg-color">Foreground Color</label>
-              <input id="fg-color" type="color" value="#000000" />
+          <div class="preview">
+            <div class="qr-code-wrapper">
+              <img id="qr-code" alt="Generated QR Code" />
             </div>
 
-            <div class="input-box">
-              <label for="bg-color">Background Color</label>
-              <input id="bg-color" type="color" value="#ffffff" />
+            <div class="btns">
+              <button class="btn" id="download-btn">
+                <i class="ri-download-line"></i> Download
+              </button>
+              <button class="btn" id="copy-btn">
+                <i class="ri-file-copy-line"></i> Copy
+              </button>
             </div>
-          </div>
-        </div>
-
-        <div class="preview">
-          <div class="qr-code-wrapper">
-            <img id="qr-code" alt="Generated QR Code" />
-          </div>
-
-          <div class="btns">
-            <button class="btn" id="download-btn">
-              <i class="ri-download-line"></i> Download
-            </button>
-            <button class="btn" id="copy-btn">
-              <i class="ri-file-copy-line"></i> Copy
-            </button>
           </div>
         </div>
       </div>
-    </div>
+    </main>
 
     <script src="assets/js/script.js"></script>
     <script src="assets/js/tabs.js"></script>
+    <script src="assets/js/nav.js"></script>
   </body>
 </html>

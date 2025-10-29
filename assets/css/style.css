@@ -2,13 +2,6 @@
   --primary-color: #17984d;
 }
 
-body {
-  display: flex;
-  justify-content: center;
-  background-color: var(--primary-color);
-  padding: 30px;
-}
-
 .qr-generator {
   display: flex;
   gap: 60px;
@@ -33,7 +26,7 @@ body {
 }
 
 @media (max-width: 768px) {
-  body {
+  main {
     padding: 15px;
   }
 
@@ -43,15 +36,15 @@ body {
   }
 }
 
-@media (max-width: 400px){
-  body {
+@media (max-width: 400px) {
+  main {
     padding: 0;
   }
 
   .card {
-    border-radius: 0 !important;
     box-shadow: none !important;
+    border-radius: 0 !important;
     width: 100%;
-    height: 100dvh;
+    min-height: calc(100dvh - 60px);
   }
 }
