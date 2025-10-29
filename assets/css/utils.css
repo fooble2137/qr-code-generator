@@ -155,7 +155,13 @@ nav a {
   font-size: 1rem;
 }
 
-nav a:hover {
+nav a.soon {
+  opacity: 0.6;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+nav a:not(.soon):hover {
   background-color: #f3f3f5;
 }
 
